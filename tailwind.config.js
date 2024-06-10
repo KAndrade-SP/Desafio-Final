@@ -11,6 +11,7 @@ module.exports = {
         caption: '#9F9F9F',
         boxLightBrown: '#FFF3E3',
         buttonBrown: '#B88E2F',
+        buttonDarkBrown: '#A07B29',
         cardWhite: '#F4F5F7',
         shadowBox: '#3A3A3A',
         carouselIndexGray: '#D8D8D8',
