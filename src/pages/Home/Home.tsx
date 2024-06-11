@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import User from "../../types/UserType"
 
 interface HomeProps {
-  user: User | null
+  user: User | null | undefined
 }
 
 const Home: React.FC<HomeProps> = ({ user }) => {

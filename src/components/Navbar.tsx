@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 
 import { navLinks } from "../types/NavLinks"
@@ -7,7 +7,13 @@ import FurniroLogoComplete from '../assets/icons/furniroLogoComplete.svg'
 import Profile from '../assets/icons/profile.svg'
 import ShoppingCart from '../assets/icons/shoppingCart.svg'
 
-const Navbar = () => {
+import User from "../types/UserType"
+
+interface NavbarProps {
+  user: User | null
+}
+
+const Navbar: React.FC<NavbarProps> = ({ user }) => {
 
   const ref = useRef<HTMLDivElement>(null)
   const location = useLocation()
@@ -31,12 +37,12 @@ const Navbar = () => {
   return (
     <>
       <header ref={ref} className="h-[80px] relative z-50 bg-white">
-        <div className="max-w-[1440px] mx-auto px-5 h-full flex justify-between items-center">
+        <div className="max-w-[1440px] mx-auto px-4 h-full flex justify-between items-center">
           
           <Link to={'/'} className="transition ease-in-out hover:scale-105">
             <img src={FurniroLogoComplete} alt="FurniroLogo" />
           </Link>
-
+          
           <div className="hidden md:flex items-center">
             <ul className="flex gap-7 font-semibold text-lg">
               {navLinks.map((link, index) => {
@@ -53,7 +59,16 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex flex-row gap-8">
-            <img src={Profile} alt="UserProfileIcon" className="cursor-pointer hover:opacity-50" />
+            {user?.photoURL
+            ? 
+              <Link to={'/profile'}>
+                <img src={user?.photoURL} alt="UserProfilePhoto" className="rounded-full w-7 cursor-pointer hover:opacity-70"></img> 
+              </Link>
+            :
+              <Link to={'/signIn'}>
+                <img src={Profile} alt="UserProfileIcon" className="cursor-pointer hover:opacity-50" />
+              </Link>
+            }
             <img src={ShoppingCart} alt="ShoppingCartIcon" className="cursor-pointer hover:opacity-50" />
           </div>
 

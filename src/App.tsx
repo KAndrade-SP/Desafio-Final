@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar"
 
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
+import Profile from "./pages/Profile/Profile"
 
 function App() {
 
@@ -34,7 +35,7 @@ function App() {
       ? 
         <></> 
       : 
-        <Navbar/>
+        <Navbar user={user} />
       }
       <Routes>
         <Route
@@ -44,11 +45,14 @@ function App() {
         <Route 
           path="/signUp" 
           element={!user ? <SignUp /> : <Navigate to="/"/>} 
-        />
-          
+        /> 
         <Route 
           path="/signIn" 
           element={!user ? <SignIn /> : <Navigate to="/"/>} 
+        />
+        <Route 
+          path="/profile" 
+          element={user ? <Profile user={user} /> : <Navigate to="/"/>} 
         />
       </Routes>
       <ToastContainer />
