@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate, useLocation, matchPath } from "react-router-dom"
 
 import { auth } from "./services/firebase"
 
@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar"
 function App() {
 
   const [user, setUser] = useState<User | null>(null)
+  const location = useLocation()
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -27,19 +28,25 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      { !!matchPath("/signIn", location.pathname) || !!matchPath("/signUp", location.pathname)
+      ? 
+        <></> 
+      : 
+        <Navbar/>
+      }
       <Routes>
         <Route
           path="/"
           element={<Home user={user} />}
         />
-        <Route
-          path="/signUp"
-          element={<SignUp/>}
+        <Route 
+          path="/signUp" 
+          element={!user ? <SignUp /> : <Navigate to="/"/>} 
         />
+          
         <Route 
           path="/signIn" 
-          element={<SignIn/>} 
+          element={!user ? <SignIn /> : <Navigate to="/"/>} 
         />
       </Routes>
     </>
