@@ -1,28 +1,49 @@
-import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth } from '../../services/firebase'
+
+import { z } from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+import { nameRegex, passwordRegex } from '../../types/Regex'
+
+const schema = z.object({
+  name: z.string()
+    .min(3, "Name invalid")
+    .regex(nameRegex, "The name cannot contain special characters or numbers")
+    .trim(),
+  email: z.string().email("Email invalid").trim(),
+  password: z.string()
+    .min(6, "Password must be at least 6 characters long")
+    .regex(passwordRegex, "The password must contain at least one uppercase character")
+    .trim(),
+  confirmPassword: z.string().min(6, "Password must be at least 6 characters long").trim(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+})
+
+type FormData = z.infer<typeof schema>
  
 const Signup = () => {
+
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  })
   
   const navigate = useNavigate()
-  const [displayName, setDisplayName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
  
-  const onSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
-
-    e.preventDefault()
-     
+  const onSubmit = async (data: FormData) => { 
     try {
 
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
       const user = userCredential.user
       
-      await updateProfile(user, { displayName })
+      await updateProfile(user, { displayName: data.name })
       console.log(user)
-
       navigate('/signIn')
+
     } catch (error) {
       console.error(error)
     }
@@ -35,7 +56,7 @@ const Signup = () => {
 
           <h1 className="text-2xl font-bold text-center text-titleGray mb-6">Furniro</h1>  
 
-          <form onSubmit={onSignUp}> 
+          <form onSubmit={handleSubmit(onSubmit)}> 
 
             <div className="mb-4">
               <label htmlFor="display-name" className="block text-sm font-medium text-subtitleGray">Name</label>
@@ -43,11 +64,10 @@ const Signup = () => {
                 type="text"
                 id="display-name"
                 className="mt-1 block w-full px-3 py-2 border border-cardWhite rounded-md shadow-sm focus:outline-none focus:ring-buttonDarkBrown focus:border-buttonDarkBrown sm:text-sm"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                required
+                {...register('name')}
                 placeholder="Name"
               />
+              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
             </div>
 
             <div className="mb-4">
@@ -58,11 +78,10 @@ const Signup = () => {
                 type="email"
                 id="email-address"
                 className="mt-1 block w-full px-3 py-2 border border-cardWhite rounded-md shadow-sm focus:outline-none focus:ring-buttonDarkBrown focus:border-buttonDarkBrown sm:text-sm"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}  
-                required                                    
+                {...register('email')}                                   
                 placeholder="Email address"                                
               />
+              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
             </div>
 
             <div className="mb-6">
@@ -73,12 +92,25 @@ const Signup = () => {
                 type="password"
                 id="password"
                 className="mt-1 block w-full px-3 py-2 border border-cardWhite rounded-md shadow-sm focus:outline-none focus:ring-buttonDarkBrown focus:border-buttonDarkBrown sm:text-sm"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)} 
-                required                                 
+                {...register('password')}                                
                 placeholder="Password"              
               />
-            </div>                                             
+              {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+            </div>
+
+            <div className="mb-6">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-subtitleGray">
+                Confirm password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                className="mt-1 block w-full px-3 py-2 border border-cardWhite rounded-md shadow-sm focus:outline-none focus:ring-buttonDarkBrown focus:border-buttonDarkBrown sm:text-sm"
+                {...register('confirmPassword')}                                
+                placeholder="Confirm password"              
+              />
+              {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
+            </div>                                          
                             
             <button
               type="submit" 

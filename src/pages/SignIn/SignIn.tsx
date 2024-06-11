@@ -1,29 +1,60 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../services/firebase'
 import { NavLink, useNavigate } from 'react-router-dom'
 
+import { z } from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+const schema = z.object({
+  email: z.string().email("Email invalid"),
+  password: z.string().min(6, "Password invalid"),
+})
+
+type FormData = z.infer<typeof schema>
+
 const SignIn = () => {
 
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  })
+
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
      
-  const onSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSignIn = async (data: FormData) => {
 
-      e.preventDefault()
-
-      signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
         const user = userCredential.user
+
+        toast.success(user.displayName + ' Welcome to Furniro!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
         navigate("/")
-        console.log(user)
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log(errorCode, errorMessage)
-      })
+      }
+      catch(error) {
+        toast.error('This account does not exist, please enter a valid account', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      }
   }
 
   function signInWithGoogle() {
@@ -33,12 +64,33 @@ const SignIn = () => {
     signInWithPopup(auth, provider)
       .then((userCredential) => {
         const user = userCredential.user
+
+        toast.success(user.displayName + ' Welcome to Furniro!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
         navigate("/")
-        console.log(user)
-      }).catch((error) => {
+      })
+      .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
-        console.log(errorCode, errorMessage)
+
+        toast.error(errorCode + errorMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
       })
   }
 
@@ -49,12 +101,33 @@ const SignIn = () => {
     signInWithPopup(auth, provider)
       .then((userCredential) => {
         const user = userCredential.user
+
+        toast.success(user.displayName + ' Welcome to Furniro!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
         navigate("/")
-        console.log(user)
-      }).catch((error) => {
+      })
+      .catch((error) => {
         const errorCode = error.code
         const errorMessage = error.message
-        console.log(errorCode, errorMessage)
+
+        toast.error(errorCode + errorMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
       })
   }
 
@@ -65,7 +138,7 @@ const SignIn = () => {
 
           <h1 className="text-2xl font-bold text-center text-titleGray mb-6">Furniro</h1>  
 
-          <form onSubmit={onSignIn}>  
+          <form onSubmit={handleSubmit(onSignIn)}>  
             <div className="mb-4">
               <label htmlFor="email-address" className="block text-sm font-medium text-subtitleGray">
                 Email address
@@ -74,11 +147,10 @@ const SignIn = () => {
                 type="email"
                 id="email-address"
                 className="mt-1 block w-full px-3 py-2 border border-cardWhite rounded-md shadow-sm focus:outline-none focus:ring-buttonDarkBrown focus:border-buttonDarkBrown sm:text-sm"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}  
-                required                                    
-                placeholder="Email address"                                
+                {...register('email')}
+                placeholder="Email address"
               />
+              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
             </div>
 
             <div className="mb-6">
@@ -89,11 +161,10 @@ const SignIn = () => {
                 type="password"
                 id="password"
                 className="mt-1 block w-full px-3 py-2 border border-cardWhite rounded-md shadow-sm focus:outline-none focus:ring-buttonDarkBrown focus:border-buttonDarkBrown sm:text-sm"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)} 
-                required                                 
+                {...register('password')}                                
                 placeholder="Password"              
               />
+              {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
             </div>  
 
             <div className="flex flex-col gap-4">
