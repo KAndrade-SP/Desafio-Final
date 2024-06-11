@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp/SignUp"
 import SignIn from "./pages/SignIn/SignIn"
 
 import User from "./types/UserType"
+import Navbar from "./components/Navbar"
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <>
+      <Navbar />
       <Routes>
         <Route
           path="/"

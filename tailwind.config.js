@@ -22,6 +22,9 @@ module.exports = {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"]
+      },
+      screens: {
+        'mini': '490px'
       }
     },
   },
