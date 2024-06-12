@@ -3,10 +3,6 @@ import { Link, useLocation } from "react-router-dom"
 
 import { navLinks } from "../types/NavLinks"
 
-import FurniroLogoComplete from '../assets/icons/furniroLogoComplete.svg'
-import Profile from '../assets/icons/profile.svg'
-import ShoppingCart from '../assets/icons/shoppingCart.svg'
-
 import User from "../types/UserType"
 
 interface NavbarProps {
@@ -40,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
         <div className="max-w-[1440px] mx-auto px-4 h-full flex justify-between items-center">
           
           <Link to={'/'} className="transition ease-in-out hover:scale-105">
-            <img src={FurniroLogoComplete} alt="FurniroLogo" />
+            <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/logos/furniroLogoComplete.svg" alt="FurniroLogo" />
           </Link>
           
           <div className="hidden md:flex items-center">
@@ -66,10 +62,10 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
               </Link>
             :
               <Link to={'/signIn'}>
-                <img src={Profile} alt="UserProfileIcon" className="cursor-pointer hover:opacity-50" />
+                <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/profile.svg" alt="UserProfileIcon" className="cursor-pointer w-7 hover:opacity-50" />
               </Link>
             }
-            <img src={ShoppingCart} alt="ShoppingCartIcon" className="cursor-pointer hover:opacity-50" />
+            <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/shoppingCart.svg" alt="ShoppingCartIcon" className="cursor-pointer hover:opacity-50" />
           </div>
 
           <div className='md:hidden' onClick={handleClick}>

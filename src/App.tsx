@@ -6,13 +6,14 @@ import { auth } from "./services/firebase"
 import Home from "./pages/Home/Home"
 import SignUp from "./pages/SignUp/SignUp"
 import SignIn from "./pages/SignIn/SignIn"
-import User from "./types/UserType"
 import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
+import Profile from "./pages/Profile/Profile"
+
+import User from "./types/UserType"
 
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
-import Profile from "./pages/Profile/Profile"
-import Footer from "./components/Footer"
 
 function App() {
 

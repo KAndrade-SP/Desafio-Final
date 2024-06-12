@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../services/firebase'
 import { NavLink, useNavigate } from 'react-router-dom'
