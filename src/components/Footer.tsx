@@ -2,7 +2,32 @@ import { Link, useLocation } from "react-router-dom"
 
 import { navLinks } from "../types/NavLinks"
 
+import { z } from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+const schema = z.object({
+  email: z.string().email("Email invalid").trim()
+})
+
+type FormData = z.infer<typeof schema>
+
 const Footer = () => {
+
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  })
+
+  const onSubmit = async (data: FormData) => { 
+    try {
+      
+      //Inserir lógica de armazenamento no redux
+      console.log(data.email)
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const location = useLocation()
 
@@ -19,18 +44,31 @@ const Footer = () => {
               FL 33134 USA
             </p>
             <div className="flex flex-row gap-3">
-              <div className="rounded-full bg-red-500 w-5 shadow-md">
 
+              <div className="flex items-center justify-center rounded-full bg-white w-7 h-7 shadow-md cursor-pointer hover:bg-carouselIndexGray">
+                <a href="https://www.facebook.com/" target="_blank">
+                  <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/facebook.svg" alt="Facebook Icon"/>
+                </a>
               </div>
-              <div className="rounded-full bg-red-500 w-5 shadow-md">
-              
+
+              <div className="flex items-center justify-center rounded-full bg-white w-7 h-7 shadow-md cursor-pointer hover:bg-carouselIndexGray">
+                <a href="https://www.instagram.com/" target="_blank">
+                  <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/instagram.svg" alt="Instagram Icon"/>
+                </a>
               </div>
-              <div className="rounded-full bg-red-500 w-5 shadow-md">
-              
+
+              <div className="flex items-center justify-center rounded-full bg-white w-7 h-7 shadow-md cursor-pointer hover:bg-carouselIndexGray">
+                <a href="https://x.com/" target="_blank">
+                  <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/twitter.svg" alt="Twitter Icon"/>
+                </a>
               </div>
-              <div className="rounded-full bg-red-500 w-5 shadow-md">
-              
+
+              <div className="flex items-center justify-center rounded-full bg-white w-7 h-7 shadow-md cursor-pointer hover:bg-carouselIndexGray">
+                <a href="https://www.linkedin.com/" target="_blank">
+                  <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/linkedin.svg" alt="LinkedIn Icon"/>
+                </a>
               </div>
+
             </div>
           </div>
 
@@ -62,14 +100,19 @@ const Footer = () => {
           <div className="flex flex-col gap-8">
           <h3 className="text-caption font-medium cursor-pointer text-lg">Newsletter</h3>
             <div className="flex flex-col items-start gap-4 sm:flex-row lg:mt-4">
-              <input 
-                type="email" 
-                name="" 
-                id=""
-                className="border-b-2 border-black outline-none"
-                placeholder="Enter Your Email Address"
-              />
-              <button className="border-b-2 border-black font-semibold">SUBSCRIBE</button>
+
+              <div className="flex flex-col">
+                <input 
+                  type="email"
+                  id="email-address"
+                  className="border-b-2 border-black outline-none"
+                  placeholder="Enter Your Email Address"
+                  {...register('email')}                                                                  
+                />
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+              </div>
+
+              <button className="border-b-2 border-black font-semibold" onClick={handleSubmit(onSubmit)}>SUBSCRIBE</button>
             </div>
           </div>
 
