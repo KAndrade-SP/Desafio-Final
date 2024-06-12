@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar"
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
 import Profile from "./pages/Profile/Profile"
+import Footer from "./components/Footer"
 
 function App() {
 
@@ -55,6 +56,8 @@ function App() {
           element={user ? <Profile user={user} /> : <Navigate to="/"/>} 
         />
       </Routes>
+
+      <Footer />
       <ToastContainer />
     </>
   )
