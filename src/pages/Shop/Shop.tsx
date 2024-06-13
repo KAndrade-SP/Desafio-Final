@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import ProductsList from "../../components/ProductsList"
 
-
 const Shop = () => {
   return (
     <>
@@ -27,7 +26,7 @@ const Shop = () => {
       {/*Shop Search Bar*/}
       <section className="bg-divisorLightBeige h-auto place-content-center">
         
-        <div className="flex flex-col md:flex-row py-7 md:justify-around">
+        <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto py-7 md:justify-around">
           <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
             <div className="flex flex-row gap-4 items-center">
               <div className="flex flex-row gap-[0.65rem] items-center cursor-pointer transition ease-in-out hover:scale-110">
