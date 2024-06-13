@@ -5,7 +5,7 @@ interface ProductProps {
     productCard: Product | null
 }
 
-const Products: React.FC<ProductProps> = ({ productCard }) => {
+const ProductsCard: React.FC<ProductProps> = ({ productCard }) => {
     return (
         <>
             <div className="relative group flex flex-col items-center bg-cardWhite shadow-lg h-[440px] cursor-pointer overflow-hidden">
@@ -40,6 +40,19 @@ const Products: React.FC<ProductProps> = ({ productCard }) => {
                     </div>
                 </div>
 
+                {productCard?.isInSale &&
+                    <div className="absolute top-0 right-0 mt-4 mr-4 bg-discountRed rounded-full w-14 h-14 flex items-center justify-center text-white">
+                        {productCard?.discountPercentage}%
+                    </div>
+                }
+
+                {productCard?.isNew &&
+                    <div className="absolute top-0 right-0 mt-4 mr-4 bg-newGreen rounded-full w-14 h-14 flex items-center justify-center text-white">
+                        New
+                    </div>
+                }
+                
+
                 <div className="flex items-center justify-center w-full h-4/6">
                     <img
                         src={productCard?.photoUrl}
@@ -62,4 +75,4 @@ const Products: React.FC<ProductProps> = ({ productCard }) => {
     )
 }
 
-export default Products
+export default ProductsCard

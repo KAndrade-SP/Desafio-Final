@@ -29,7 +29,7 @@ const Shop = () => {
       </section>
 
       {/*Shop Benefits*/}
-      <section className="flex flex-row flex-wrap gap-10 px-4 md:flex-row bg-divisorLightBeige h-auto justify-around py-12">
+      <section className="flex flex-row flex-wrap gap-10 px-4 md:flex-row bg-divisorLightBeige h-auto justify-around py-24">
         <div className="flex flex-row gap-4">
           <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/trophy.svg" alt="Trophy Icon" />
           <div className="flex flex-col gap-2">

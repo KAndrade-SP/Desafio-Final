@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 import axios from "axios"
 
-import Products from "./Products"
+import ProductsCard from "./ProductsCard"
 
 import Product from "../types/ProductsType"
 
@@ -57,60 +57,60 @@ const ProductsList = () => {
         <>
             <section className="bg-divisorLightBeige h-auto place-content-center">
                 <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto py-7 md:justify-around">
-                <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
-                    <div className="flex flex-row gap-4 items-center">
-                    <div className="flex flex-row gap-[0.65rem] items-center cursor-pointer transition ease-in-out hover:scale-110">
-                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/system-uicons_filtering.svg" alt="Filters Icon" />
-                        <p className="font-medium mt-[2px] text-lg">Filter</p>
+                    <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
+                        <div className="flex flex-row gap-4 items-center">
+                            <div className="flex flex-row gap-[0.65rem] items-center cursor-pointer transition ease-in-out hover:scale-110">
+                                <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/system-uicons_filtering.svg" alt="Filters Icon" />
+                                <p className="font-medium mt-[2px] text-lg">Filter</p>
+                            </div>
+
+                            <div className="flex flex-row gap-3 items-center">
+                                <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/ci_grid-big-round.svg" alt="Grid Layout Icon" className="w-8 cursor-pointer transition ease-in-out hover:scale-110"/>
+                                <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/bi_view-list.svg" alt="View Icon" className="cursor-pointer transition ease-in-out hover:scale-110"/>
+                            </div>
+                        </div>
+
+                        <div className="hidden md:flex w-px h-8 bg-caption mx-2"></div>
+
+                        <div className="flex items-center">
+                            <p className="text-center">Showing {indexFirstProduct + 1}-{
+                                indexLastProduct && indexLastProduct < productCard.length ? indexLastProduct : productCard.length
+                            } of {productCard.length} results</p>
+                        </div>
                     </div>
 
-                    <div className="flex flex-row gap-3 items-center">
-                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/ci_grid-big-round.svg" alt="Grid Layout Icon" className="w-8 cursor-pointer transition ease-in-out hover:scale-110"/>
-                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/bi_view-list.svg" alt="View Icon" className="cursor-pointer transition ease-in-out hover:scale-110"/>
+                    <div className="flex flex-row gap-4 items-center justify-center mt-4 md:mt-0">
+                        <p>Show</p>
+                        <input 
+                            type="number"
+                            id="productsPerPage"
+                            min={1}
+                            onChange={showProducts}
+                            placeholder={currentProducts.length.toString()}
+                            className="w-14 h-14 bg-white text-center no-spinner outline-none"
+                        />
+                        <p>Short by</p>
+                        <p>Default</p>
                     </div>
-                    </div>
-
-                    <div className="hidden md:flex w-px h-8 bg-caption mx-2"></div>
-
-                    <div className="flex items-center">
-                    <p className="text-center">Showing {indexFirstProduct + 1}-{
-                        indexLastProduct && indexLastProduct < productCard.length ? indexLastProduct : productCard.length
-                    } of {productCard.length} results</p>
-                    </div>
-                </div>
-
-                <div className="flex flex-row gap-4 items-center justify-center mt-4 md:mt-0">
-                    <p>Show</p>
-                    <input 
-                        type="number"
-                        id="productsPerPage"
-                        min={1}
-                        onChange={showProducts}
-                        placeholder={currentProducts.length.toString()}
-                        className="w-14 h-14 bg-white text-center no-spinner outline-none"
-                    />
-                    <p>Short by</p>
-                    <p>Default</p>
-                </div>
-                
                 </div>
             </section>
 
             <section className="flex flex-col max-w-[1440px] mx-auto gap-8 my-16 ">
                 <div className="flex flex-row flex-wrap gap-10 justify-center transition ease-in-out">
                     {currentProducts.map((productCard) => (
-                        <Products 
+                        <ProductsCard 
                             key={productCard.SKU}
                             productCard={productCard}
                         />
                     ))}
                 </div>
+
                 <div className="flex flex-row flex-wrap gap-8 justify-center pt-6">
                     {Array.from({ length: totalPages }, (_, index) => (
                         <div key={index + 1} className="flex flex-row gap-8">
                             <button 
                                 onClick={() => handleClick(index + 1)}
-                                className={currentPage === index + 1 ? 'bg-buttonBrown rounded-lg px-6 py-4 text-white' : 'bg-divisorLightBeige rounded-lg px-6 py-4'}
+                                className={currentPage === index + 1 ? 'bg-buttonBrown focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown rounded-lg px-6 py-4 text-white hover:bg-divisorLightBeige hover:text-black' : 'bg-divisorLightBeige focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown rounded-lg px-6 py-4 hover:bg-buttonBrown hover:text-white'}
                             >
                                 {index + 1}
                             </button>
@@ -119,7 +119,7 @@ const ProductsList = () => {
                     {currentPage !== totalPages && 
                         <button 
                             onClick={() => handleClick(currentPage + 1)}
-                            className={'bg-divisorLightBeige rounded-lg px-6 py-4'}
+                            className={'bg-divisorLightBeige focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown rounded-lg px-6 py-4 hover:bg-buttonBrown hover:text-white'}
                         >
                             Next
                         </button>
