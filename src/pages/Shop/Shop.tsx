@@ -30,7 +30,7 @@ const Shop = () => {
         <div className="flex flex-col md:flex-row py-7 md:justify-around">
           <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
             <div className="flex flex-row gap-4 items-center">
-              <div className="flex flex-row gap-[0.65rem] cursor-pointer transition ease-in-out hover:scale-110">
+              <div className="flex flex-row gap-[0.65rem] items-center cursor-pointer transition ease-in-out hover:scale-110">
                 <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/system-uicons_filtering.svg" alt="Filters Icon" />
                 <p className="font-medium mt-[2px] text-lg">Filter</p>
               </div>
