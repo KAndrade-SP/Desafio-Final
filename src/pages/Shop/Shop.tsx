@@ -7,7 +7,7 @@ const Shop = () => {
       {/*Shop Banner Section*/}
       <section className='relative h-[315px] flex justify-center items-center'>
         <div className='absolute inset-0 w-full h-full'>
-          <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/staticImages/ShopBanner.png" alt="" className='w-full h-full object-cover z-30'/>
+          <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/staticImages/ShopBanner.png" alt="" className='w-full h-full object-cover z-30' />
         </div>
 
         <div className="flex flex-col gap-4 justify-center z-40">
@@ -23,12 +23,9 @@ const Shop = () => {
         </div>
       </section>
 
-      {/*Shop Product List*/}
-      <section>
-        <ProductsList />
-      </section>
+      <ProductsList />
 
-      {/*Shop Benefits*/}
+      {/*Shop Benefits Section*/}
       <section className="flex flex-row flex-wrap gap-10 px-4 md:flex-row bg-divisorLightBeige h-auto justify-around py-24">
         <div className="flex flex-row gap-4">
           <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/trophy.svg" alt="Trophy Icon" />
@@ -60,9 +57,9 @@ const Shop = () => {
             <h3 className="font-semibold text-2xl">24 / 7 Support</h3>
             <p className="text-caption font-medium">Dedicated support</p>
           </div>
-        </div>  
+        </div>
       </section>
-      
+
     </>
   )
 }

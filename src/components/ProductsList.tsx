@@ -2,9 +2,9 @@ import { useState, useEffect } from "react"
 
 import axios from "axios"
 
-import ProductsCard from "./ProductsCard"
-
 import Product from "../types/ProductsType"
+import ProductsCard from "./ProductsCard"
+import ProductFilters from "./ProductsFilters"
 
 const ProductsList = () => {
 
@@ -13,15 +13,35 @@ const ProductsList = () => {
     const [productsPerPage, setProductsPerPage] = useState<number>(16)
     const [loading, setLoading] = useState<boolean>(true)
 
+    const [searchName, setSearchName] = useState<string>('')
+    const [maxPrice, setMaxPrice] = useState<number>(10000000)
+    const [isInSale, setIsInSale] = useState<boolean>(false)
+    const [isNew, setIsNew] = useState<boolean>(false)
+    const [showFilters, setShowFilters] = useState<boolean>(false)
+
+    const handleSearchNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setSearchName(e.target.value)
+    const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => setMaxPrice(Number(e.target.value))
+    const handleIsInSaleChange = () => setIsInSale(!isInSale)
+    const handleIsNewChange = () => setIsNew(!isNew)
+    const toggleFilters = () => setShowFilters(!showFilters)
+
+    const filteredProducts = productCard.filter(product => {
+        return (
+            product.productName.toLowerCase().includes(searchName.toLowerCase()) &&
+            product.price <= maxPrice &&
+            (!isInSale || product.isInSale) &&
+            (!isNew || product.isNew)
+        )
+    })
+
     const indexLastProduct = currentPage * productsPerPage
     const indexFirstProduct = indexLastProduct - productsPerPage
-    const currentProducts = productCard.slice(indexFirstProduct, indexLastProduct)
-    const totalPages = Math.ceil(productCard.length / productsPerPage)
+    const currentProducts = filteredProducts.slice(indexFirstProduct, indexLastProduct)
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage) 
 
     const handleClick = (pageNumber: number) => { setCurrentPage(pageNumber) }
 
     const showProducts = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-
         const value = parseInt(e.target.value)
 
         if (parseInt(e.target.value) > 0 && parseInt(e.target.value) <= productCard.length) {
@@ -57,12 +77,15 @@ const ProductsList = () => {
         <>
             <section className="bg-divisorLightBeige h-auto place-content-center">
                 <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto py-7 md:justify-around">
-                    <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
+                    <div className="flex flex-col md:flex-row gap-10 items-center">
                         <div className="flex flex-row gap-4 items-center">
-                            <div className="flex flex-row gap-[0.65rem] items-center cursor-pointer transition ease-in-out hover:scale-110">
+                            <button 
+                                className="flex flex-row gap-[0.65rem] items-center cursor-pointer transition ease-in-out hover:scale-110"
+                                onClick={toggleFilters}
+                            >
                                 <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/system-uicons_filtering.svg" alt="Filters Icon" />
                                 <p className="font-medium mt-[2px] text-lg">Filter</p>
-                            </div>
+                            </button>
 
                             <div className="flex flex-row gap-3 items-center">
                                 <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/ci_grid-big-round.svg" alt="Grid Layout Icon" className="w-8 cursor-pointer transition ease-in-out hover:scale-110"/>
@@ -79,7 +102,7 @@ const ProductsList = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-row gap-4 items-center justify-center mt-4 md:mt-0">
+                    <div className="flex flex-row gap-4 items-center justify-center mt-10 md:mt-0">
                         <p>Show</p>
                         <input 
                             type="number"
@@ -95,6 +118,20 @@ const ProductsList = () => {
                 </div>
             </section>
 
+            {showFilters &&
+                <ProductFilters
+                    searchName={searchName}
+                    maxPrice={maxPrice}
+                    isInSale={isInSale}
+                    isNew={isNew}
+                    onSearchNameChange={handleSearchNameChange}
+                    onMaxPriceChange={handleMaxPriceChange}
+                    onIsInSaleChange={handleIsInSaleChange}
+                    onIsNewChange={handleIsNewChange}
+                />
+            }
+
+            {/*Product Cards Section*/}
             <section className="flex flex-col max-w-[1440px] mx-auto gap-8 my-16 ">
                 <div className="flex flex-row flex-wrap gap-10 justify-center transition ease-in-out">
                     {currentProducts.map((productCard) => (
