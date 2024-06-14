@@ -38,7 +38,7 @@ const Home = () => {
 
       <ProductsHome />
 
-      <section className="flex flex-row gap-20 justify-center items-center my-20 bg-carouselLightBox py-20 px-20">
+      <section className="flex flex-col 2xl:flex-row gap-16 justify-center items-center my-20 bg-carouselLightBox py-20 md:py-10 px-20">
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-2">
             <h2 className='text-4xl font-bold text-titleGray leading-[3rem]'>50+ Beautiful rooms <br/> inspiration</h2>
