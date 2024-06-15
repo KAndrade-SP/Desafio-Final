@@ -22,6 +22,7 @@ module.exports = {
         starYellow:'#FFC700',
         divisorLightBeige: "#F9F1E7",
         divisorBeige: "#FAF3EA",
+        Beige: "#FAF3EA",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"]

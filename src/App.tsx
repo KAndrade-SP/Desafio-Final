@@ -38,10 +38,10 @@ function App() {
   return (
     <>
       <PersistGate loading={null} persistor={persistor}>
-        { !!matchPath("/signIn", location.pathname) || !!matchPath("/signUp", location.pathname)
-        ? 
-          <></> 
-        : 
+        {!!matchPath("/signIn", location.pathname) || !!matchPath("/signUp", location.pathname)
+          ?
+          <></>
+          :
           <Navbar user={user} />
         }
         <Routes>
@@ -49,25 +49,25 @@ function App() {
             path="/"
             element={<Home />}
           />
-          <Route 
-            path="/signUp" 
-            element={!user ? <SignUp /> : <Navigate to="/"/>} 
-          /> 
-          <Route 
-            path="/signIn" 
-            element={!user ? <SignIn /> : <Navigate to="/"/>} 
+          <Route
+            path="/signUp"
+            element={!user ? <SignUp /> : <Navigate to="/" />}
           />
-          <Route 
-            path="/profile" 
-            element={user ? <Profile user={user} /> : <Navigate to="/"/>} 
+          <Route
+            path="/signIn"
+            element={!user ? <SignIn /> : <Navigate to="/" />}
           />
-          <Route 
-            path="/shop" 
-            element={<Shop />} 
+          <Route
+            path="/profile"
+            element={user ? <Profile user={user} /> : <Navigate to="/" />}
           />
-          <Route 
-            path="/productPage" 
-            element={<ProductPage />} 
+          <Route
+            path="/shop"
+            element={<Shop />}
+          />
+          <Route
+            path="/product/:sku"
+            element={<ProductPage />}
           />
         </Routes>
 

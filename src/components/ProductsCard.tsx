@@ -1,14 +1,25 @@
 import React from "react"
+import { useNavigate } from 'react-router-dom'
 import Product from "../types/ProductsType"
 
 interface ProductProps {
-    productCard: Product | null
+    productCard: Product
 }
 
 const ProductsCard: React.FC<ProductProps> = ({ productCard }) => {
+    
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+        navigate(`/product/${productCard.SKU}`)
+    }
+    
     return (
         <>
-            <div className="relative group flex flex-col items-center bg-cardWhite shadow-lg h-[440px] cursor-pointer overflow-hidden">
+            <div 
+                className="relative group flex flex-col items-center bg-cardWhite shadow-lg h-[440px] cursor-pointer overflow-hidden"
+                onClick={handleClick}
+            >
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="flex flex-col gap-4">
                         <button className="z-10 hover:bg-boxLightBrown px-10 py-3 w-52 self-center bg-white text-sm font-semibold text-buttonBrown">

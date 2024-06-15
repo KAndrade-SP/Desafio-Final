@@ -20,7 +20,7 @@ const ProductsList = () => {
     const [productsPerPage, setProductsPerPage] = useState<number>(16)
 
     const [searchName, setSearchName] = useState<string>('')
-    const [maxPrice, setMaxPrice] = useState<number>(10000000)
+    const [maxPrice, setMaxPrice] = useState<number>(100000000)
     const [isInSale, setIsInSale] = useState<boolean>(false)
     const [isNew, setIsNew] = useState<boolean>(false)
     const [showFilters, setShowFilters] = useState<boolean>(false)
