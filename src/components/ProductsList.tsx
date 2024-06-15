@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react"
 
-import axios from "axios"
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchProducts } from '../redux/Products/actions'
+import { RootState } from '../redux/store'
 
-import Product from "../types/ProductsType"
 import ProductsCard from "./ProductsCard"
 import ProductFilters from "./ProductsFilters"
 
 const ProductsList = () => {
 
-    const [productCard, setProductCard] = useState<Product[]>([])
+    const dispatch = useDispatch<any>()
+    const { products, loading, error } = useSelector((state: RootState) => state.products)
+
+    useEffect(() => {
+        dispatch(fetchProducts())
+    }, [dispatch])
+
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [productsPerPage, setProductsPerPage] = useState<number>(16)
-    const [loading, setLoading] = useState<boolean>(true)
 
     const [searchName, setSearchName] = useState<string>('')
     const [maxPrice, setMaxPrice] = useState<number>(10000000)
@@ -25,7 +31,7 @@ const ProductsList = () => {
     const handleIsNewChange = () => setIsNew(!isNew)
     const toggleFilters = () => setShowFilters(!showFilters)
 
-    const filteredProducts = productCard.filter(product => {
+    const filteredProducts = products.filter(product => {
         return (
             product.productName.toLowerCase().includes(searchName.toLowerCase()) &&
             product.price <= maxPrice &&
@@ -44,23 +50,11 @@ const ProductsList = () => {
     const showProducts = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const value = parseInt(e.target.value)
 
-        if (parseInt(e.target.value) > 0 && parseInt(e.target.value) <= productCard.length) {
+        if (parseInt(e.target.value) > 0 && parseInt(e.target.value) <= products.length) {
             setProductsPerPage(value)
             setCurrentPage(1)
         } 
     }
-
-    useEffect(() => {
-        axios.get('https://run.mocky.io/v3/708cfe1a-d580-4986-84d3-6ce69a85c4f9/products')
-        .then(response => {
-            setProductCard(response.data.products)
-            setLoading(false)
-        })
-        .catch(error => {
-            console.error(error)
-            setLoading(false)
-        })
-    }, [])
 
     if (loading) {
         return (
@@ -97,8 +91,8 @@ const ProductsList = () => {
 
                         <div className="flex items-center">
                             <p className="text-center">Showing {indexFirstProduct + 1}-{
-                                indexLastProduct && indexLastProduct < productCard.length ? indexLastProduct : productCard.length
-                            } of {productCard.length} results</p>
+                                indexLastProduct && indexLastProduct < products.length ? indexLastProduct : products.length
+                            } of {products.length} results</p>
                         </div>
                     </div>
 
