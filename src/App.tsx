@@ -18,6 +18,7 @@ import User from "./types/UserType"
 
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
+import CheckOut from "./pages/CheckOut/CheckOut"
 
 function App() {
 
@@ -28,7 +29,6 @@ function App() {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         setUser(authUser)
-        console.log(user)
       } else {
         setUser(null)
       }
@@ -68,6 +68,11 @@ function App() {
           <Route
             path="/product/:sku"
             element={<ProductPage />}
+          />
+          <Route
+            path="/checkout"
+            //Necessita refatoração nessa proteção de rota:
+            element={user && <CheckOut />}
           />
         </Routes>
 
