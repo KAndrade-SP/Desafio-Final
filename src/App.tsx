@@ -66,7 +66,7 @@ function App() {
           />
           <Route
             path="/profile"
-            element={user ? <Profile user={user} /> : <Navigate to="/" />}
+            element={<Profile user={user} />}
           />
           <Route
             path="/shop"
@@ -78,7 +78,6 @@ function App() {
           />
           <Route
             path="/checkout"
-            //Necessita refatoração nessa proteção de rota:
             element={<CheckOut user={user} />}
           />
         </Routes>

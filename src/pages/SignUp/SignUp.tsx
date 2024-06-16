@@ -2,6 +2,9 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth } from '../../services/firebase'
 
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -41,11 +44,19 @@ const Signup = () => {
       const user = userCredential.user
 
       await updateProfile(user, { displayName: data.name })
-      console.log(user)
       navigate('/signIn')
 
     } catch (error) {
-      console.error(error)
+      toast.error('Error message: ' + error, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
     }
   }
 

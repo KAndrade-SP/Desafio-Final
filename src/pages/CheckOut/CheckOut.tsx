@@ -1,6 +1,10 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+
 import BenefitsBar from '../../components/BenefitsBar'
 import TextInput from '../../components/TextInput'
+import User from "../../types/UserType"
+import { nameRegex } from '../../types/Regex'
 
 import { z } from "zod"
 import { useForm } from "react-hook-form"
@@ -8,10 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
-import User from "../../types/UserType"
-import { nameRegex } from '../../types/Regex'
-import { useEffect, useState } from 'react'
 
 const schema = z.object({
     firstName: z.string()
@@ -345,7 +345,12 @@ const CheckOut: React.FC<CheckOutProps> = ({ user }) => {
                     <BenefitsBar />
                 </>
                 :
-                <div>Você não pode acessar essa página sem estar logado!</div>
+                <section className="flex flex-col gap-10 items-center justify-center mx-auto py-20">
+                    <h3 className="font-medium text-3xl text-titleGray text-center">Please sign in to continue</h3>
+                    <Link to="/signIn">
+                        <button className='px-20 py-3 self-center rounded-xl hover:bg-buttonBrown hover:border-buttonDarkBrown hover:text-white border border-titleGray'>Sign in</button>
+                    </Link>
+                </section>
             }
         </>
     )

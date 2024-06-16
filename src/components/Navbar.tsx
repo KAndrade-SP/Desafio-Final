@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
                 <img src={user?.photoURL} alt="UserProfilePhoto" className="rounded-full w-7 cursor-pointer hover:opacity-70"></img> 
               </Link>
             :
-              <Link to={'/signIn'}>
+              <Link to={'/profile'}>
                 <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/profile.svg" alt="UserProfileIcon" className="cursor-pointer w-7 hover:opacity-50" />
               </Link>
             }

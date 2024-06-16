@@ -30,9 +30,9 @@ const SignIn = () => {
         const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
         const user = userCredential.user
 
-        toast.success(user.displayName + ' Welcome to Furniro!', {
+        toast.success('Welcome to Furniro!', {
           position: "top-center",
-          autoClose: 1000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -62,18 +62,6 @@ const SignIn = () => {
 
     signInWithPopup(auth, provider)
       .then((userCredential) => {
-        const user = userCredential.user
-
-        toast.success(user.displayName + ' Welcome to Furniro!', {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
         navigate("/")
       })
       .catch((error) => {
@@ -99,18 +87,7 @@ const SignIn = () => {
 
     signInWithPopup(auth, provider)
       .then((userCredential) => {
-        const user = userCredential.user
-
-        toast.success(user.displayName + ' Welcome to Furniro!', {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
+        console.log(userCredential)
         navigate("/")
       })
       .catch((error) => {
