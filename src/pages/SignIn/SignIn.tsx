@@ -32,7 +32,7 @@ const SignIn = () => {
 
         toast.success(user.displayName + ' Welcome to Furniro!', {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -45,7 +45,7 @@ const SignIn = () => {
       catch(error) {
         toast.error('This account does not exist, please enter a valid account', {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -66,7 +66,7 @@ const SignIn = () => {
 
         toast.success(user.displayName + ' Welcome to Furniro!', {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -82,7 +82,7 @@ const SignIn = () => {
 
         toast.error(errorCode + errorMessage, {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -103,7 +103,7 @@ const SignIn = () => {
 
         toast.success(user.displayName + ' Welcome to Furniro!', {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -119,7 +119,7 @@ const SignIn = () => {
 
         toast.error(errorCode + errorMessage, {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

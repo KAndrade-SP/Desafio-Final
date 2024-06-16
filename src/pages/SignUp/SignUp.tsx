@@ -25,21 +25,21 @@ const schema = z.object({
 })
 
 type FormData = z.infer<typeof schema>
- 
+
 const Signup = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
   })
-  
+
   const navigate = useNavigate()
- 
-  const onSubmit = async (data: FormData) => { 
+
+  const onSubmit = async (data: FormData) => {
     try {
 
       const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
       const user = userCredential.user
-      
+
       await updateProfile(user, { displayName: data.name })
       console.log(user)
       navigate('/signIn')
@@ -48,15 +48,15 @@ const Signup = () => {
       console.error(error)
     }
   }
- 
+
   return (
     <>
-      <section className="flex items-center justify-center min-h-screen bg-white">        
+      <section className="flex items-center justify-center min-h-screen bg-white">
         <div className="w-full max-w-md p-6 bg-boxLightBrown rounded-lg shadow-md">
 
-          <h1 className="text-2xl font-bold text-center text-titleGray mb-6">Furniro</h1>  
+          <h1 className="text-2xl font-bold text-center text-titleGray mb-6">Furniro</h1>
 
-          <form onSubmit={handleSubmit(onSubmit)}> 
+          <form onSubmit={handleSubmit(onSubmit)}>
 
             <div className="mb-4">
               <label htmlFor="display-name" className="block text-sm font-medium text-subtitleGray">Name</label>
@@ -78,8 +78,8 @@ const Signup = () => {
                 type="email"
                 id="email-address"
                 className="mt-1 block w-full px-3 py-2 border border-cardWhite rounded-md shadow-sm focus:outline-none focus:ring-buttonDarkBrown focus:border-buttonDarkBrown sm:text-sm"
-                {...register('email')}                                   
-                placeholder="Email address"                                
+                {...register('email')}
+                placeholder="Email address"
               />
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
             </div>
@@ -92,8 +92,8 @@ const Signup = () => {
                 type="password"
                 id="password"
                 className="mt-1 block w-full px-3 py-2 border border-cardWhite rounded-md shadow-sm focus:outline-none focus:ring-buttonDarkBrown focus:border-buttonDarkBrown sm:text-sm"
-                {...register('password')}                                
-                placeholder="Password"              
+                {...register('password')}
+                placeholder="Password"
               />
               {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
             </div>
@@ -106,30 +106,30 @@ const Signup = () => {
                 type="password"
                 id="confirmPassword"
                 className="mt-1 block w-full px-3 py-2 border border-cardWhite rounded-md shadow-sm focus:outline-none focus:ring-buttonDarkBrown focus:border-buttonDarkBrown sm:text-sm"
-                {...register('confirmPassword')}                                
-                placeholder="Confirm password"              
+                {...register('confirmPassword')}
+                placeholder="Confirm password"
               />
               {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
-            </div>                                          
-                            
+            </div>
+
             <button
-              type="submit" 
-              className="w-full px-4 py-2 bg-buttonBrown text-white rounded-md hover:bg-buttonDarkBrown focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown"                      
-            >  
-              Sign up                               
-            </button>                                                            
+              type="submit"
+              className="w-full px-4 py-2 bg-buttonBrown text-white rounded-md hover:bg-buttonDarkBrown focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown"
+            >
+              Sign up
+            </button>
           </form>
-                      
+
           <p className="mt-4 text-center text-sm text-gray-600">
             Already have an account? {' '}
             <NavLink to="/signIn" className="text-buttonBrown hover:text-buttonDarkBrown">
               Sign in
             </NavLink>
-          </p>                   
+          </p>
         </div>
       </section>
     </>
   )
 }
- 
+
 export default Signup
