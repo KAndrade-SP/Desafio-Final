@@ -26,13 +26,20 @@ function App() {
   const location = useLocation()
 
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        setUser(authUser)
-      } else {
-        setUser(null)
-      }
-    })
+
+    let isMounted = true
+
+    if (isMounted) {
+      auth.onAuthStateChanged((authUser) => {
+        if (authUser) {
+          setUser(authUser)
+        } else {
+          setUser(null)
+        }
+      })
+    }
+    return () => { isMounted = false }
+
   }, [])
 
   return (
@@ -72,11 +79,16 @@ function App() {
           <Route
             path="/checkout"
             //Necessita refatoração nessa proteção de rota:
-            element={user && <CheckOut />}
+            element={<CheckOut user={user} />}
           />
         </Routes>
 
-        <Footer />
+        {!!matchPath("/signIn", location.pathname) || !!matchPath("/signUp", location.pathname)
+          ?
+          <></>
+          :
+          <Footer />
+        }
         <ToastContainer />
       </PersistGate>
     </>
