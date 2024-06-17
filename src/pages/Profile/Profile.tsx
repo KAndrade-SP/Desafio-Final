@@ -42,7 +42,7 @@ const Profile = () => {
         <section className="flex flex-col gap-10 items-center justify-center mx-auto py-20">
           <h3 className="font-medium text-3xl text-titleGray text-center">You don't have a profile, please sign in to continue</h3>
           <Link to="/signIn">
-            <button className='px-20 py-3 self-center rounded-xl hover:bg-buttonBrown hover:border-buttonDarkBrown hover:text-white border border-titleGray'>Sign in</button>
+            <button className='px-20 py-3 self-center rounded-xl text-buttonBrown font-bold bg-white hover:bg-buttonDarkBrown border-2 border-buttonBrown hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown'>Sign in</button>
           </Link>
         </section>
       }

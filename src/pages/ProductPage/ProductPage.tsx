@@ -15,7 +15,7 @@ const ProductPage = () => {
     const [isSelectedSize, setIsSelectedSize] = useState<number>(1)
     const handleClickSize = (sizeValue: number) => { setIsSelectedSize(sizeValue) }
 
-    const [quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState(0)
     const dispatch = useDispatch()
 
     if (!product) {
@@ -30,8 +30,9 @@ const ProductPage = () => {
     }
 
     const handleAddToCart = () => {
-        console.log(product, quantity)
-        dispatch(addToCart(product, quantity))
+        if (quantity > 0) {
+            dispatch(addToCart(product, quantity))
+        }
     }
 
     const handleCounterChange = (count: number) => {

@@ -62,7 +62,6 @@ const ProductsCard: React.FC<ProductProps> = ({ productCard }) => {
                         New
                     </div>
                 }
-                
 
                 <div className="flex items-center justify-center w-full h-4/6">
                     <img
@@ -75,9 +74,9 @@ const ProductsCard: React.FC<ProductProps> = ({ productCard }) => {
                     <h3 className="text-2xl text-titleGray font-semibold">{productCard?.productName}</h3>
                     <p className="text-subtitleGray font-medium">{productCard?.subtitle}</p>
                     <div className="flex flex-row justify-between items-center">
-                        <p className="text-lg font-bold">${productCard?.price}</p>
+                        <p className="text-lg font-bold">${productCard?.priceWithDiscount}</p>
                         <p className="text-sm font-medium text-caption line-through">
-                            {(productCard?.isInSale ? '$' + productCard.priceWithDiscount : <></>)}
+                            {(productCard?.isInSale ? '$' + productCard.price : <></>)}
                         </p>
                     </div>
                 </div>

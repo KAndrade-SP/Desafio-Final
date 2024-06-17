@@ -29,6 +29,7 @@ module.exports = {
       },
       screens: {
         'mini': '490px',
+        'mxd': '590px',
         '3xl': '1800px'
       }
     },

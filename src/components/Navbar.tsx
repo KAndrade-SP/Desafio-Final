@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom"
 import { navLinks } from "../types/NavLinks"
 
 import User from "../types/UserType"
+import CartOverlay from "./CartOverlay"
 
 interface NavbarProps {
   user: User | null
@@ -25,6 +26,10 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
   }
 
   const handleClick = () => {
+    setToggle(!toggle)
+  }
+
+  const handleClickCart = () => {
     setToggle(!toggle)
   }
 
@@ -65,9 +70,14 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
                 <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/profile.svg" alt="UserProfileIcon" className="cursor-pointer w-7 hover:opacity-50" />
               </Link>
             }
-            <Link to={'/cart'}>
+            <div onClick={handleClickCart}>
               <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/shoppingCart.svg" alt="ShoppingCartIcon" className="cursor-pointer hover:opacity-50" />
-            </Link>
+            </div>
+            
+            <div className="hidden md:flex" onClick={handleClickCart}>
+              {toggle && <CartOverlay />}
+            </div>
+            
           </div>
 
           <div className='md:hidden' onClick={handleClick}>
@@ -79,7 +89,7 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
           </div>
 
           {/* DROPDOWN MENU */}
-          <div onClick={handleClick} className={toggle ? 'flex flex-col gap-10 fixed inset-y-0 right-0 z-40 w-1/2 h-1/2 px-10 justify-center bg-white shadow-lg overflow-y-auto md:hidden' : 'hidden'}>
+          <div onClick={handleClick} className={toggle ? 'flex flex-col gap-10 fixed inset-y-0 top-0 right-0 z-40 w-1/2 px-10 justify-start bg-divisorLightBeige shadow-lg overflow-y-auto md:hidden' : 'hidden'}>
 
             {toggle &&
               <div className="flex items-center justify-between border-b py-6">
@@ -105,13 +115,13 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
 
             <div className="flex flex-col mini:flex-row text-sm gap-4 border-t py-6 justify-between">
               <Link to={'/cart'}>
-                <div className="w-20 py-1 px-4 flex items-center justify-center rounded-xl border border-black hover:bg-cardWhite cursor-pointer">
+                <div className="w-20 py-1 px-4 flex items-center justify-center rounded-xl text-buttonBrown font-bold bg-white hover:bg-buttonDarkBrown border-2 border-buttonBrown hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown cursor-pointer">
                   <p>Cart</p>
                 </div>
               </Link>
 
               <Link to={'/profile'}>
-                <div className="w-20 py-1 px-4 flex items-center justify-center rounded-xl border border-black hover:bg-cardWhite cursor-pointer">
+                <div className="w-20 py-1 px-4 flex items-center justify-center rounded-xl text-buttonBrown font-bold bg-white hover:bg-buttonDarkBrown border-2 border-buttonBrown hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown cursor-pointer">
                   <p>Profile</p>
                 </div>
               </Link>

@@ -34,7 +34,7 @@ const ProductsList = () => {
     const filteredProducts = products.filter(product => {
         return (
             product.productName.toLowerCase().includes(searchName.toLowerCase()) &&
-            product.price <= maxPrice &&
+            product.priceWithDiscount <= maxPrice &&
             (!isInSale || product.isInSale) &&
             (!isNew || product.isNew)
         )
