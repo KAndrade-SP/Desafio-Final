@@ -1,38 +1,32 @@
-import React from 'react'
-import { signOut } from "firebase/auth"
-import { auth } from '../../services/firebase'
 import { Link, useNavigate } from 'react-router-dom'
-
-import User from "../../types/UserType"
 
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCurrentUser } from '../../redux/Auth/selectors'
+import { logOut } from '../../redux/Auth/actions'
 
-interface ProfileProps {
-  user: User | null | undefined
-}
+const Profile = () => {
 
-const Profile: React.FC<ProfileProps> = ({ user }) => {
+  const dispatch = useDispatch<any>()
+  const user = useSelector(selectCurrentUser)
 
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    signOut(auth).then(() => {
 
-      navigate("/")
+    dispatch(logOut())
+    navigate("/")
 
-      toast.success('Signed out succesfully!', {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      })
-    }).catch((error) => {
-      console.log(error)
+    toast.success('Signed out succesfully!', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
     })
   }
 

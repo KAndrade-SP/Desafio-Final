@@ -44,12 +44,23 @@ const Signup = () => {
       const user = userCredential.user
 
       await updateProfile(user, { displayName: data.name })
+
+      toast.success('Account created! Please sign in!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
       navigate('/signIn')
 
     } catch (error) {
       toast.error('Error message: ' + error, {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

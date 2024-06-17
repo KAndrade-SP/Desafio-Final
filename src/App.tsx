@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react"
 import { Routes, Route, Navigate, useLocation, matchPath } from "react-router-dom"
 import { PersistGate } from "redux-persist/integration/react"
 import { persistor } from "./redux/store"
-
-import { auth } from "./services/firebase"
+import { useSelector } from "react-redux"
+import { selectCurrentUser, selectIsAuthenticated } from "./redux/Auth/selectors"
 
 import Home from "./pages/Home/Home"
 import SignUp from "./pages/SignUp/SignUp"
@@ -13,34 +12,17 @@ import Footer from "./components/Footer"
 import Profile from "./pages/Profile/Profile"
 import Shop from "./pages/Shop/Shop"
 import ProductPage from "./pages/ProductPage/ProductPage"
-
-import User from "./types/UserType"
+import CheckOut from "./pages/CheckOut/CheckOut"
+import PrivateRoute from "./components/PrivateRoute"
 
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
-import CheckOut from "./pages/CheckOut/CheckOut"
 
 function App() {
 
-  const [user, setUser] = useState<User | null>(null)
+  const user = useSelector(selectCurrentUser)
+  const isAuthenticated = useSelector(selectIsAuthenticated)
   const location = useLocation()
-
-  useEffect(() => {
-
-    let isMounted = true
-
-    if (isMounted) {
-      auth.onAuthStateChanged((authUser) => {
-        if (authUser) {
-          setUser(authUser)
-        } else {
-          setUser(null)
-        }
-      })
-    }
-    return () => { isMounted = false }
-
-  }, [])
 
   return (
     <>
@@ -58,16 +40,13 @@ function App() {
           />
           <Route
             path="/signUp"
-            element={!user ? <SignUp /> : <Navigate to="/" />}
+            element={!user && !isAuthenticated ? <SignUp /> : <Navigate to="/" />}
           />
           <Route
             path="/signIn"
-            element={!user ? <SignIn /> : <Navigate to="/" />}
+            element={!user && !isAuthenticated ? <SignIn /> : <Navigate to="/" />}
           />
-          <Route
-            path="/profile"
-            element={<Profile user={user} />}
-          />
+
           <Route
             path="/shop"
             element={<Shop />}
@@ -77,9 +56,15 @@ function App() {
             element={<ProductPage />}
           />
           <Route
-            path="/checkout"
-            element={<CheckOut user={user} />}
+            path="/profile"
+            element={<Profile />}
           />
+          <Route element={<PrivateRoute />}>
+            <Route
+              path="/checkout"
+              element={<CheckOut />}
+            />
+          </Route>
         </Routes>
 
         {!!matchPath("/signIn", location.pathname) || !!matchPath("/signUp", location.pathname)
