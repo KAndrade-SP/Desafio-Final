@@ -21,7 +21,7 @@ export const fetchProductsFailure = (error: string): ProductsActionTypes => ({
 export const fetchProducts = (): ThunkAction<void, RootState, unknown, ProductsActionTypes> => {
     return async (dispatch) => {
         try {
-            const response = await axios.get('https://run.mocky.io/v3/45479f4e-6b21-445a-8b81-49f04353c7d5/products')
+            const response = await axios.get('https://run.mocky.io/v3/89a8f6fc-60ce-45e4-9d80-c8b2887982db/products')
             const products = response.data.products
 
             dispatch({

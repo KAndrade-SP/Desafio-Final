@@ -34,11 +34,11 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
     <>
       <header ref={ref} className="h-[80px] relative z-50 bg-white">
         <div className="max-w-[1440px] mx-auto px-4 h-full flex justify-between items-center">
-          
+
           <Link to={'/'} className="transition ease-in-out hover:scale-105">
             <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/logos/furniroLogoComplete.svg" alt="FurniroLogo" />
           </Link>
-          
+
           <div className="hidden md:flex items-center">
             <ul className="flex gap-7 font-semibold text-lg">
               {navLinks.map((link, index) => {
@@ -56,16 +56,18 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
 
           <div className="hidden md:flex flex-row gap-8">
             {user?.photoURL
-            ? 
+              ?
               <Link to={'/profile'}>
-                <img src={user?.photoURL} alt="UserProfilePhoto" className="rounded-full w-7 cursor-pointer hover:opacity-70"></img> 
+                <img src={user?.photoURL} alt="UserProfilePhoto" className="rounded-full w-7 cursor-pointer hover:opacity-70"></img>
               </Link>
-            :
+              :
               <Link to={'/profile'}>
                 <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/profile.svg" alt="UserProfileIcon" className="cursor-pointer w-7 hover:opacity-50" />
               </Link>
             }
-            <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/shoppingCart.svg" alt="ShoppingCartIcon" className="cursor-pointer hover:opacity-50" />
+            <Link to={'/cart'}>
+              <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/shoppingCart.svg" alt="ShoppingCartIcon" className="cursor-pointer hover:opacity-50" />
+            </Link>
           </div>
 
           <div className='md:hidden' onClick={handleClick}>
@@ -77,8 +79,8 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
           </div>
 
           {/* DROPDOWN MENU */}
-          <div onClick={handleClick} className={toggle?'flex flex-col gap-10 fixed inset-y-0 right-0 z-40 w-1/2 h-1/2 px-10 justify-center bg-white shadow-lg overflow-y-auto md:hidden':'hidden'}>
-            
+          <div onClick={handleClick} className={toggle ? 'flex flex-col gap-10 fixed inset-y-0 right-0 z-40 w-1/2 h-1/2 px-10 justify-center bg-white shadow-lg overflow-y-auto md:hidden' : 'hidden'}>
+
             {toggle &&
               <div className="flex items-center justify-between border-b py-6">
                 <h3 className="hidden sm:flex font-semibold text-xl">Menu</h3>
@@ -87,8 +89,8 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
                 </svg>
               </div>
             }
-            
-            <ul className="flex flex-col gap-6">  
+
+            <ul className="flex flex-col gap-6">
               {navLinks.map((link, index) => {
                 const isActive = location.pathname === link.path
                 return (
@@ -98,16 +100,21 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
                     </Link>
                   </li>
                 )
-              })}  
+              })}
             </ul>
 
             <div className="flex flex-col mini:flex-row text-sm gap-4 border-t py-6 justify-between">
-              <div className="w-20 py-1 px-4 flex items-center justify-center rounded-xl border border-black hover:bg-cardWhite cursor-pointer">
-                <p>Cart</p>
-              </div>
-              <div className="w-20 py-1 px-4 flex items-center justify-center rounded-xl border border-black hover:bg-cardWhite cursor-pointer">
-                <p>Profile</p>
-              </div>
+              <Link to={'/cart'}>
+                <div className="w-20 py-1 px-4 flex items-center justify-center rounded-xl border border-black hover:bg-cardWhite cursor-pointer">
+                  <p>Cart</p>
+                </div>
+              </Link>
+
+              <Link to={'/profile'}>
+                <div className="w-20 py-1 px-4 flex items-center justify-center rounded-xl border border-black hover:bg-cardWhite cursor-pointer">
+                  <p>Profile</p>
+                </div>
+              </Link>
             </div>
 
           </div>

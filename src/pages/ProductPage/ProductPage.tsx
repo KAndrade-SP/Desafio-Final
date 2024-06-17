@@ -1,8 +1,9 @@
 import { Link, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import Counter from '../../components/Counter'
 import { useState } from 'react'
+import { addToCart } from '../../redux/Cart/actions'
 
 const ProductPage = () => {
 
@@ -13,6 +14,30 @@ const ProductPage = () => {
 
     const [isSelectedSize, setIsSelectedSize] = useState<number>(1)
     const handleClickSize = (sizeValue: number) => { setIsSelectedSize(sizeValue) }
+
+    const [quantity, setQuantity] = useState(1)
+    const dispatch = useDispatch()
+
+    if (!product) {
+        return (
+            <section className="flex flex-col gap-10 items-center justify-center mx-auto py-20">
+                <h3 className="font-medium text-3xl text-titleGray text-center">The product was not found</h3>
+                <Link to="/shop">
+                    <button className='px-20 py-3 self-center rounded-xl hover:bg-buttonBrown hover:border-buttonDarkBrown hover:text-white border border-titleGray'>Go back</button>
+                </Link>
+            </section>
+        )
+    }
+
+    const handleAddToCart = () => {
+        console.log(product, quantity)
+        dispatch(addToCart(product, quantity))
+    }
+
+    const handleCounterChange = (count: number) => {
+        setQuantity(count)
+    }
+
 
     const renderStars = () => {
 
@@ -135,8 +160,8 @@ const ProductPage = () => {
 
 
                     <div className="flex flex-row gap-4">
-                        <Counter />
-                        <button className='px-8 py-3 rounded-xl hover:bg-buttonBrown hover:border-buttonDarkBrown hover:text-white border border-titleGray'>Add to Cart</button>
+                        <Counter onChange={handleCounterChange} />
+                        <button onClick={handleAddToCart} className='px-8 py-3 rounded-xl hover:bg-buttonBrown hover:border-buttonDarkBrown hover:text-white border border-titleGray'>Add to Cart</button>
                     </div>
 
                     <div className="w-full h-px bg-carouselIndexGray"></div>
@@ -204,7 +229,7 @@ const ProductPage = () => {
 
             <section className="flex flex-col gap-10 justify-center items-center py-10">
                 <h1 className="font-semibold text-3xl">Related products</h1>
-                
+
 
             </section>
         </>

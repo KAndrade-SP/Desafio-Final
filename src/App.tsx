@@ -12,6 +12,7 @@ import Footer from "./components/Footer"
 import Profile from "./pages/Profile/Profile"
 import Shop from "./pages/Shop/Shop"
 import ProductPage from "./pages/ProductPage/ProductPage"
+import Cart from "./pages/Cart/CartPage"
 import CheckOut from "./pages/CheckOut/CheckOut"
 import PrivateRoute from "./components/PrivateRoute"
 
@@ -54,6 +55,10 @@ function App() {
           <Route
             path="/product/:sku"
             element={<ProductPage />}
+          />
+          <Route
+            path="/cart"
+            element={<Cart />}
           />
           <Route
             path="/profile"
