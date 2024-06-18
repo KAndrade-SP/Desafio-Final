@@ -15,6 +15,7 @@ import ProductPage from "./pages/ProductPage/ProductPage"
 import Cart from "./pages/Cart/CartPage"
 import CheckOut from "./pages/CheckOut/CheckOut"
 import PrivateRoute from "./components/PrivateRoute"
+import Contact from "./pages/Contact/Contact"
 
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
@@ -63,6 +64,10 @@ function App() {
           <Route
             path="/profile"
             element={<Profile />}
+          />
+          <Route
+            path="/contact"
+            element={<Contact />}
           />
           <Route element={<PrivateRoute />}>
             <Route
