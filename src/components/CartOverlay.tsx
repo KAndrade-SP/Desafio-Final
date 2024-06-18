@@ -18,7 +18,7 @@ const CartOverlay: React.FC = () => {
 
     return (
         <>
-            <div className='flex flex-col gap-4 fixed inset-y-0 top-0 right-0 z-40 w-1/4 h-[75%] px-10 items justify-between bg-white shadow-lg overflow-y-auto'>
+            <div className='flex flex-col gap-4 fixed inset-y-0 top-0 right-0 z-40 w-1/2 xl:w-1/3 2xl:w-1/4 h-[75%] px-10 items justify-between bg-white shadow-lg overflow-y-auto'>
 
                 <div>
                     <div className="flex items-center justify-between border-b py-6">
@@ -74,18 +74,18 @@ const CartOverlay: React.FC = () => {
 
                     <div className="flex flex-row text-sm gap-2 border-t py-6 justify-between">
                         <Link to={'/cart'}>
-                            <div className="py-1 px-4 flex items-center justify-center rounded-xl text-buttonBrown font-bold bg-white hover:bg-buttonDarkBrown border-2 border-buttonBrown hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown cursor-pointer">
+                            <div className="py-1 px-4 flex items-center justify-center rounded-xl text-titleGray font-medium bg-white hover:bg-buttonDarkBrown border-2 border-titleGray hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown cursor-pointer">
                                 <p>Cart</p>
                             </div>
                         </Link>
 
                         <Link to={'/checkout'}>
-                            <div className="py-1 px-4 flex items-center justify-center rounded-xl text-buttonBrown font-bold bg-white hover:bg-buttonDarkBrown border-2 border-buttonBrown hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown cursor-pointer">
+                            <div className="py-1 px-4 flex items-center justify-center rounded-xl text-titleGray font-medium bg-white hover:bg-buttonDarkBrown border-2 border-titleGray hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown cursor-pointer">
                                 <p>Checkout</p>
                             </div>
                         </Link>
                         <Link to={'/'}>
-                            <div className="py-1 px-4 flex items-center justify-center rounded-xl text-buttonBrown font-bold bg-white hover:bg-buttonDarkBrown border-2 border-buttonBrown hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown cursor-pointer">
+                            <div className="py-1 px-4 flex items-center justify-center rounded-xl text-titleGray font-medium bg-white hover:bg-buttonDarkBrown border-2 border-titleGray hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown cursor-pointer">
                                 <p>Comparision</p>
                             </div>
                         </Link>
