@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loginWithEmail, loginWithFacebook, loginWithGoogle } from '../../redux/Auth/actions'
 
@@ -23,7 +23,6 @@ const SignIn = () => {
   })
 
   const dispatch = useDispatch<any>()
-  const navigate = useNavigate()
 
   const onSignIn = async (data: FormData) => {
 

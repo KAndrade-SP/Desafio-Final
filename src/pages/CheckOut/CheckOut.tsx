@@ -1,65 +1,31 @@
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 
 import BenefitsBar from '../../components/BenefitsBar'
-import { nameRegex } from '../../types/Regex'
 
-import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import InputMask from 'react-input-mask'
 
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-
-const schema = z.object({
-    firstName: z.string()
-        .min(3, "First name invalid")
-        .regex(nameRegex, "The name cannot contain special characters or numbers")
-        .trim(),
-    lastName: z.string()
-        .min(3, "Last name invalid")
-        .regex(nameRegex, "The name cannot contain special characters or numbers")
-        .trim(),
-    companyName: z.string()
-        .min(3, "Company invalid")
-        .trim(),
-    zipCode: z.string()
-        .regex(/^\d{5}-\d{3}$/, 'Invalid ZIP code')
-        .trim(),
-    countryRegion: z.string()
-        .min(2, "Country or region invalid")
-        .trim(),
-    streetAddress: z.string()
-        .min(3, "Street address invalid")
-        .trim(),
-    city: z.string()
-        .min(3, "City invalid")
-        .trim(),
-    province: z.string()
-        .min(2, "Province invalid")
-        .trim(),
-    addOnAddress: z.string().trim(),
-    addInfo: z.string().trim(),
-    email: z.string()
-        .email("Email invalid")
-        .trim(),
-})
-
-type FormData = z.infer<typeof schema>
+import { checkOutSchema, FormData } from '../../types/CheckOutValidations'
+import { submitForm } from '../../redux/FormCheckout/actions'
 
 const CheckOut = () => {
 
-    const cartItems = useSelector((state: RootState) => state.cart.items)
-
-    const subTotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2)
-    const total = cartItems.reduce((acc, item) => acc + item.product.priceWithDiscount * item.quantity, 0).toFixed(2)
-
+    const dispatch = useDispatch()
     const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>({
-        resolver: zodResolver(schema),
+        resolver: zodResolver(checkOutSchema),
     })
 
+    const onSubmit = (formData: FormData) => {
+        submitForm(formData, dispatch)
+    }
+
+    const cartItems = useSelector((state: RootState) => state.cart.items)
+    const subTotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2)
+    const total = cartItems.reduce((acc, item) => acc + item.product.priceWithDiscount * item.quantity, 0).toFixed(2)
+   
     const fetchAddress = async (cep: string) => {
         try {
 
@@ -76,33 +42,6 @@ const CheckOut = () => {
             setValue('streetAddress', '')
             setValue('city', '')
             setValue('province', '')
-        }
-    }
-
-    const onSubmit = async (data: FormData) => {
-        try {
-            toast.success('Form submitted', {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            })
-        }
-        catch (error) {
-            toast.error('Invalid data', {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            })
         }
     }
 
