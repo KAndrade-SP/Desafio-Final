@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
 
 import BenefitsBar from '../../components/BenefitsBar'
 import { nameRegex } from '../../types/Regex'
@@ -6,11 +8,10 @@ import { nameRegex } from '../../types/Regex'
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import InputMask from 'react-input-mask'
 
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
-import InputMask from 'react-input-mask'
 
 const schema = z.object({
     firstName: z.string()
@@ -49,6 +50,11 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 const CheckOut = () => {
+
+    const cartItems = useSelector((state: RootState) => state.cart.items)
+
+    const subTotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2)
+    const total = cartItems.reduce((acc, item) => acc + item.product.priceWithDiscount * item.quantity, 0).toFixed(2)
 
     const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>({
         resolver: zodResolver(schema),
@@ -255,22 +261,40 @@ const CheckOut = () => {
 
                 <div className="flex flex-col gap-8 self-center md:self-start">
 
-                    <div className="flex flex-row justify-between gap-20 items-center">
-                        <p className='text-2xl font-semibold'>Product</p>
-                        <p className='text-2xl font-semibold'>Subtotal</p>
-                    </div>
-                    <div className="flex flex-row justify-between items-center">
-                        <p className='text-sm font-semibold text-caption'>Product Name <span className="text-black">X 1</span> </p>
-                        <p className='text-sm font-semibold'>$250000</p>
-                    </div>
-                    <div className="flex flex-row justify-between items-center">
-                        <p className='text-sm font-semibold'>Subtotal</p>
-                        <p className='text-sm font-semibold'>$250000</p>
-                    </div>
-                    <div className="flex flex-row justify-between items-center">
-                        <p className='text-sm font-semibold'>Total</p>
-                        <p className='text-2xl text-buttonBrown font-semibold'>$250000</p>
-                    </div>
+                    {cartItems.length === 0 ? (
+                        <div className='flex flex-col justify-center items-center gap-6'>
+                            <h3 className="font-medium text-3xl text-titleGray text-center">The cart was empty!</h3>
+                            <Link to="/shop">
+                                <button className='px-20 py-3 self-center rounded-xl text-buttonBrown font-bold bg-white hover:bg-buttonDarkBrown border-2 border-buttonBrown hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown'>Go to shop</button>
+                            </Link>
+                        </div>
+
+                    ) :
+                        <>
+                            <div className="flex flex-row justify-between gap-20 items-center">
+                                <p className='text-2xl font-semibold'>Product</p>
+                                <p className='text-2xl font-semibold'>Subtotal</p>
+                            </div>
+                            {cartItems.map((item) => (
+                                <div key={item.product.SKU} className='flex flex-col gap-4'>
+
+                                    <div className="flex flex-row justify-between items-center">
+                                        <p className='text-md font-medium text-caption'>{item.product.productName} <span className="text-black">X {item.quantity}</span> </p>
+                                        <p className='text-md'>$ {(item.product.priceWithDiscount * item.quantity).toFixed(2)}</p>
+                                    </div>
+                                    <div className="flex flex-row justify-between items-center">
+                                        <p className='text-md font-medium'>Subtotal</p>
+                                        <p className='text-md'>$ {subTotal}</p>
+                                    </div>
+
+                                </div>
+                            ))}
+                            <div className="flex flex-row justify-between items-center">
+                                <p className='text-md font-medium'>Total</p>
+                                <p className='text-2xl text-buttonBrown font-semibold'>$ {total}</p>
+                            </div>
+                        </>
+                    }
 
                     <div className="w-full h-px bg-carouselIndexGray"></div>
 
