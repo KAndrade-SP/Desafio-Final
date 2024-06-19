@@ -8,18 +8,20 @@ import productsReducer from './Products/reducers'
 import authReducer from './Auth/reducers'
 import cartReducer from './Cart/reducers'
 import formCheckOutReducer from './FormCheckout/reducers'
+import formContactReducer from './FormContact/reducers'
 
 const rootReducer = combineReducers({
     products: productsReducer,
     auth: authReducer,
     cart: cartReducer,
     formCheckout: formCheckOutReducer,
+    formContact: formContactReducer
 })
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['products', 'auth', 'cart', 'formCheckout']
+    whitelist: ['products', 'auth', 'cart', 'formCheckout', 'formContact']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

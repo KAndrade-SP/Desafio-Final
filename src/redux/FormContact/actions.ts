@@ -1,18 +1,18 @@
 import { Dispatch } from 'redux'
-import { checkOutSchema, FormData } from '../../types/CheckOutValidations'
+import { contactSchema, FormContactData } from '../../types/ContactValidations'
 import { FORM_SUBMIT_FAILURE, FORM_SUBMIT_SUCCESS } from './types'
 
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-export const submitForm = async (formData: FormData, dispatch: Dispatch) => {
+export const submitContactForm = async (formContactData: FormContactData, dispatch: Dispatch) => {
 
     try {
-        await checkOutSchema.parseAsync(formData)
+        await contactSchema.parseAsync(formContactData)
 
         dispatch({
             type: FORM_SUBMIT_SUCCESS,
-            payload: formData,
+            payload: formContactData,
         })
 
         toast.success('Submitted with success!', {

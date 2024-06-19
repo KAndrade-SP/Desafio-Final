@@ -1,18 +1,22 @@
+import { useDispatch } from 'react-redux'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 import { FormContactData, contactSchema } from '../../types/ContactValidations'
 import BenefitsBar from '../../components/BenefitsBar'
+import { submitContactForm } from '../../redux/FormContact/actions'
+
 
 const Contact = () => {
 
+  const dispatch = useDispatch()
   const { register, handleSubmit, formState: { errors } } = useForm<FormContactData>({
     resolver: zodResolver(contactSchema),
   })
 
-  const onSubmit = (formData: FormContactData) => {
-    console.log(formData)
+  const onSubmit = (formContactData: FormContactData) => {
+    submitContactForm(formContactData, dispatch)
   }
 
   return (
