@@ -63,7 +63,19 @@ const ProductsList = () => {
     const currentProducts = filteredProducts.slice(indexFirstProduct, indexLastProduct)
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
 
-    const handleClick = (pageNumber: number) => { setCurrentPage(pageNumber) }
+    const maxPageButtons = 5
+    let startPage = Math.max(1, currentPage - Math.floor(maxPageButtons / 2))
+    let endPage = startPage + maxPageButtons - 1
+
+    if (endPage > totalPages) {
+        endPage = totalPages
+        startPage = Math.max(1, endPage - maxPageButtons + 1)
+    }
+
+    const handleClick = (pageNumber: number) => {
+        
+        setCurrentPage(pageNumber) 
+    }
 
     const showProducts = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const value = parseInt(e.target.value)
@@ -160,16 +172,31 @@ const ProductsList = () => {
                 </div>
 
                 <div className="flex flex-row flex-wrap gap-8 justify-center pt-6">
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <div key={index + 1} className="flex flex-row gap-8">
+                    {startPage > 1 && (
+                        <button
+                            key="pageFirst"
+                            onClick={() => handleClick(1)}
+                            className={`bg-divisorLightBeige focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown rounded-lg px-6 py-4 hover:bg-buttonBrown hover:text-white`}
+                        >
+                            1
+                        </button>
+                    )}
+                    {startPage > 2 && (
+                        <span className="bg-divisorLightBeige focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown rounded-lg px-6 py-4 hover:bg-buttonBrown hover:text-white cursor-pointer">...</span>
+                    )}
+                    {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
+                        <div key={`page${startPage + index}`} className="flex flex-row gap-8">
                             <button
-                                onClick={() => handleClick(index + 1)}
-                                className={currentPage === index + 1 ? 'bg-buttonBrown focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown rounded-lg px-6 py-4 text-white hover:bg-divisorLightBeige hover:text-black' : 'bg-divisorLightBeige focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown rounded-lg px-6 py-4 hover:bg-buttonBrown hover:text-white'}
+                                onClick={() => handleClick(startPage + index)}
+                                className={currentPage === startPage + index ? 'bg-buttonBrown focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown rounded-lg px-6 py-4 text-white hover:bg-divisorLightBeige hover:text-black' : 'bg-divisorLightBeige focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown rounded-lg px-6 py-4 hover:bg-buttonBrown hover:text-white'}
                             >
-                                {index + 1}
+                                {startPage + index}
                             </button>
                         </div>
                     ))}
+                    {endPage < totalPages - 1 && (
+                        <span className="bg-divisorLightBeige focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown rounded-lg px-6 py-4 hover:bg-buttonBrown hover:text-white cursor-pointer">...</span>
+                    )}
                     {currentPage !== totalPages &&
                         <button
                             onClick={() => handleClick(currentPage + 1)}
