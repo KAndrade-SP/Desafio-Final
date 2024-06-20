@@ -1,0 +1,18 @@
+export const productsCategories = [
+    'Chair',
+    'Sofa',
+    'Table',
+    'Lamp',
+    'Cushion',
+    'Bookshelf',
+    'Stool',
+    'Desk',
+    'Nightstand',
+    'Blanket',
+    'Bed',
+    'Stand',
+    'Dining Set',
+    'Bean Bag',
+    'Recliner',
+    'Rug',
+]
