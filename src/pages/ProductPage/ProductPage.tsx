@@ -4,6 +4,7 @@ import { RootState } from '../../redux/store'
 import Counter from '../../components/Counter'
 import { useState } from 'react'
 import { addToCart } from '../../redux/Cart/actions'
+import ProductsCard from '../../components/ProductsCard'
 
 const ProductPage = () => {
 
@@ -11,6 +12,8 @@ const ProductPage = () => {
     const product = useSelector((state: RootState) =>
         state.products.products.find((p) => p.SKU === sku)
     )
+
+    const relatedProducts = useSelector((state: RootState) => state.products.products.filter((p) => p.category === product?.category && p.SKU !== sku).slice(0, 4))
 
     const [isSelectedSize, setIsSelectedSize] = useState<number>(1)
     const handleClickSize = (sizeValue: number) => { setIsSelectedSize(sizeValue) }
@@ -230,8 +233,14 @@ const ProductPage = () => {
 
             <section className="flex flex-col gap-10 justify-center items-center py-10">
                 <h1 className="font-semibold text-3xl">Related products</h1>
-
-
+                <div className="flex flex-row flex-wrap gap-10 justify-center items-center mx-4">
+                    {relatedProducts.map((relatedProduct) => (
+                        <ProductsCard key={relatedProduct.SKU} productCard={relatedProduct} />
+                    ))}
+                </div>
+                <Link to="/shop">
+                    <button className="px-[5.5rem] py-4 text-buttonBrown font-bold bg-white hover:bg-buttonDarkBrown border-2 border-buttonBrown hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-buttonDarkBrown">Show More</button>
+                </Link>
             </section>
         </>
     )
