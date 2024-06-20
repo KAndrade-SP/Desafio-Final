@@ -1,32 +1,22 @@
 import { Link, useLocation } from "react-router-dom"
+import { useDispatch } from "react-redux"
 
 import { navLinks } from "../types/NavLinks"
 
-import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-
-const schema = z.object({
-  email: z.string().email("Email invalid").trim()
-})
-
-type FormData = z.infer<typeof schema>
+import { submitFooterForm } from "../redux/FormFooter/actions"
+import { FormFooterData, footerSchema } from "../types/FooterValidations"
 
 const Footer = () => {
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
-    resolver: zodResolver(schema),
+  const dispatch = useDispatch()
+  const { register, handleSubmit, formState: { errors } } = useForm<FormFooterData>({
+    resolver: zodResolver(footerSchema),
   })
 
-  const onSubmit = async (data: FormData) => { 
-    try {
-      
-      //Inserir lógica de armazenamento no redux
-      console.log(data.email)
-
-    } catch (error) {
-      console.error(error)
-    }
+  const onSubmit = (formFooterData: FormFooterData) => { 
+    submitFooterForm(formFooterData, dispatch)
   }
 
   const location = useLocation()

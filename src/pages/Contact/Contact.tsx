@@ -7,7 +7,6 @@ import { FormContactData, contactSchema } from '../../types/ContactValidations'
 import BenefitsBar from '../../components/BenefitsBar'
 import { submitContactForm } from '../../redux/FormContact/actions'
 
-
 const Contact = () => {
 
   const dispatch = useDispatch()
