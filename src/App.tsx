@@ -19,6 +19,7 @@ import Contact from "./pages/Contact/Contact"
 
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
+import Error404 from "./pages/ErrorPage/Error404"
 
 function App() {
 
@@ -75,6 +76,10 @@ function App() {
               element={<CheckOut />}
             />
           </Route>
+          <Route
+            path="/*"
+            element={<Error404 />}
+          />
         </Routes>
 
         {!!matchPath("/signIn", location.pathname) || !!matchPath("/signUp", location.pathname)
