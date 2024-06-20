@@ -37,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
 
   return (
     <>
-      <header ref={ref} className="h-[80px] relative z-50 bg-white">
+      <header ref={ref} className="w-full h-[80px] relative z-50 bg-white">
         <div className="max-w-[1440px] mx-auto px-4 h-full flex justify-between items-center">
 
           <Link to={'/'} className="transition ease-in-out hover:scale-105">
