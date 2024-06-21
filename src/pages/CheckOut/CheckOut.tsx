@@ -14,7 +14,7 @@ import { submitForm } from '../../redux/FormCheckout/actions'
 const CheckOut = () => {
 
     const dispatch = useDispatch()
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>({
+    const { register, handleSubmit, setValue, clearErrors, formState: { errors } } = useForm<FormData>({
         resolver: zodResolver(checkOutSchema),
     })
 
@@ -36,6 +36,8 @@ const CheckOut = () => {
                 setValue('streetAddress', data.logradouro)
                 setValue('city', data.localidade)
                 setValue('province', data.uf)
+
+                clearErrors(['streetAddress', 'city', 'province'])
             }
 
         } catch (error) {
@@ -266,9 +268,8 @@ const CheckOut = () => {
 
                         <button onClick={handleSubmit(onSubmit)} className='mt-4 px-20 py-3 self-center rounded-xl hover:bg-buttonBrown hover:border-buttonDarkBrown hover:text-white border border-titleGray'>Place order</button>
                     </div>
-
+                    
                 </div>
-
             </section>
 
             <BenefitsBar />

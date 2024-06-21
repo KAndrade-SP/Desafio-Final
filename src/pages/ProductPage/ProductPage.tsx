@@ -108,7 +108,6 @@ const ProductPage = () => {
             </section>
 
             <section className="flex flex-col md:flex-row gap-20 3xl:gap-52 justify-center items-center md:items-start mt-10 border-b-2 pb-20">
-
                 <div className="flex flex-row flex-wrap justify-center items-center gap-8">
                     <div className="flex flex-row mini:flex-col flex-wrap gap-8">
                         <img src={product?.photoUrl} alt="Additional photo of product" className='w-10 md:w-16 rounded-lg transition ease-in-out hover:scale-105 cursor-pointer' />
@@ -213,7 +212,6 @@ const ProductPage = () => {
                         </div>
                     </div>
                 </div>
-
             </section>
 
             <section className="flex flex-col gap-10 justify-center items-center py-10">
@@ -228,7 +226,6 @@ const ProductPage = () => {
                     <img src={product?.photoUrl} alt="Additional photo of product" className='rounded-md transition ease-in-out hover:scale-105 cursor-pointer' />
                     <img src={product?.photoUrl} alt="Additional photo of product" className='rounded-md transition ease-in-out hover:scale-105 cursor-pointer' />
                 </div>
-
             </section>
 
             <section className="flex flex-col gap-10 justify-center items-center py-10">

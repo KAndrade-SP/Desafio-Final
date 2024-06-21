@@ -126,12 +126,10 @@ const Cart: React.FC = () => {
                                 </div>
                             ))}
                         </div>
-
                     </div>
 
                     <div className="flex flex-col gap-8 text-center xl:self-start py-10 px-10 bg-divisorLightBeige">
                         <h2 className='font-bold text-2xl'>Cart Totals</h2>
-
                         <div className="flex flex-col gap-4">
                             <div className='flex justify-between'>
                                 <p className='font-semibold text-md'>Subtotal</p>
@@ -142,13 +140,13 @@ const Cart: React.FC = () => {
                                 <p className='text-buttonBrown font-semibold'>$ {total}</p>
                             </div>
                         </div>
-
-                        <button className='px-20 py-3 self-center rounded-xl hover:bg-buttonBrown hover:border-buttonDarkBrown hover:text-white border border-titleGray'>Check Out</button>
+                        <Link to='/checkout'>
+                            <button className='px-20 py-3 self-center rounded-xl hover:bg-buttonBrown hover:border-buttonDarkBrown hover:text-white border border-titleGray'>Check Out</button>
+                        </Link>
                     </div>
 
                 </section>
             )}
-
             <BenefitsBar />
         </>
 

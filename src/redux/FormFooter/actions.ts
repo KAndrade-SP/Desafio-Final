@@ -15,8 +15,6 @@ export const submitFooterForm = async (formFooterData: FormFooterData, dispatch:
             payload: formFooterData,
         })
 
-        console.log(formFooterData)
-
         toast.success('Submitted with success!', {
             position: "top-center",
             autoClose: 1000,
