@@ -90,12 +90,12 @@ const ProductPage = () => {
                         <Link to={'/'}>
                             <p className='text-caption hover:text-subtitleGray'>Home</p>
                         </Link>
-                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/arrow.svg" alt="Arrow Icon" />
+                        <img src="/assets/icons/arrow.svg" alt="Arrow Icon" />
 
                         <Link to={'/shop'}>
                             <p className='text-caption hover:text-subtitleGray'>Shop</p>
                         </Link>
-                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/arrow.svg" alt="Arrow Icon" />
+                        <img src="/assets/icons/arrow.svg" alt="Arrow Icon" />
                     </div>
 
                     <div className="hidden md:flex w-px h-8 bg-subtitleGray mx-2"></div>
@@ -198,13 +198,13 @@ const ProductPage = () => {
                             <div className='flex-grow tabular-nums '>
                                 <div className='flex flex-row gap-6 items-center'>
                                     <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/akar-icons_facebook-fill.svg" alt="Facebook Link Icon" className='hover:opacity-70' />
+                                        <img src="/assets/icons/facebookFill.svg" alt="Facebook Link Icon" className='hover:opacity-70' />
                                     </a>
                                     <a href="https://www.linkedin.com/" target="_blank">
-                                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/akar-icons_linkedin-box-fill.svg" alt="LinkedIn Link Icon" className='hover:opacity-70' />
+                                        <img src="/assets/icons/linkedinFill.svg" alt="LinkedIn Link Icon" className='hover:opacity-70' />
                                     </a>
                                     <a href="https://x.com/" target="_blank">
-                                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/ant-design_twitter-circle-filled.svg" alt="Twitter Link Icon" className='hover:opacity-70' />
+                                        <img src="/assets/icons/twitterFill.svg" alt="Twitter Link Icon" className='hover:opacity-70' />
                                     </a>
                                 </div>
                             </div>

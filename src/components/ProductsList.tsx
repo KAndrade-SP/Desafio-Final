@@ -107,13 +107,13 @@ const ProductsList = () => {
                                 className="flex flex-row gap-[0.65rem] items-center cursor-pointer transition ease-in-out hover:scale-110"
                                 onClick={toggleFilters}
                             >
-                                <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/system-uicons_filtering.svg" alt="Filters Icon" />
+                                <img src="/assets/icons/filterIcon.svg" alt="Filters Icon" />
                                 <p className="font-medium mt-[2px] text-lg">Filter</p>
                             </button>
 
                             <div className="flex flex-row gap-3 items-center">
-                                <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/ci_grid-big-round.svg" alt="Grid Layout Icon" className="w-8 cursor-pointer transition ease-in-out hover:scale-110" />
-                                <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/bi_view-list.svg" alt="View Icon" className="cursor-pointer transition ease-in-out hover:scale-110" />
+                                <img src="/assets/icons/gridIcon.svg" alt="Grid Layout Icon" className="w-8 cursor-pointer transition ease-in-out hover:scale-110" />
+                                <img src="/assets/icons/viewList.svg" alt="View Icon" className="cursor-pointer transition ease-in-out hover:scale-110" />
                             </div>
                         </div>
 

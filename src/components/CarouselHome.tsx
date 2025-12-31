@@ -33,7 +33,7 @@ const CarouselHome: React.FC = () => {
                 <div className="embla__container">
                     {Array.from({ length: 3 }).map((_, index) => (
                         <div key={index} className={`relative cursor-pointer embla__slide ${index === selectedIndex ? 'is-selected transition ease-in-out hover:scale-110' : ''}`}>
-                            <img src={`https://final-challenge-compass.s3.us-east-2.amazonaws.com/staticImages/carousel${index + 1}.png`} alt="" />
+                            <img src={`/assets/img/carousel${index + 1}.png`} alt="" />
                             {index === selectedIndex &&
                                 <>
                                     <div className='absolute bg-white opacity-80 flex flex-col gap-4 py-6 px-6 3xl:bottom-20 3xl:left-10'>
@@ -41,7 +41,7 @@ const CarouselHome: React.FC = () => {
                                         <p className='font-semibold text-2xl'>Inner Peace</p>
                                     </div>
                                     <div className='hidden 3xl:flex absolute bg-buttonBrown py-4 px-5 3xl:bottom-20 3xl:right-20'>
-                                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/arrow.svg" alt="Arrow Icon" />
+                                        <img src="/assets/icons/arrow.svg" alt="Arrow Icon" />
                                     </div>
                                 </>
                             }

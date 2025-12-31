@@ -28,22 +28,22 @@ const ProductsCard: React.FC<ProductProps> = ({ productCard }) => {
                         <div className="flex flex-row gap-4">
                             <div className="flex flex-row gap-2 z-10 cursor-pointer hover:opacity-75">
                                 <img
-                                    src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/gridicons_share.svg"
+                                    src="/assets/icons/share.svg"
                                     alt="Share Icon"
                                 />
                                 <p className="text-white font-medium">Share</p>
                             </div>
                             <div className="flex flex-row gap-2 z-10 cursor-pointer hover:opacity-75">
                                 <img
-                                    src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/compare-svgrepo-com+1.svg"
-                                    alt="Share Icon"
+                                    src="/assets/icons/compare.svg"
+                                    alt="Compare Icon"
                                 />
                                 <p className="text-white font-medium">Compare</p>
                             </div>
                             <div className="flex flex-row gap-2 z-10 cursor-pointer hover:opacity-75">
                                 <img
-                                    src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/Heart.svg"
-                                    alt="Share Icon"
+                                    src="/assets/icons/heart.svg"
+                                    alt="Heart Icon"
                                 />
                                 <p className="text-white font-medium">Like</p>
                             </div>

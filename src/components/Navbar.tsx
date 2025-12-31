@@ -41,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
         <div className="max-w-[1440px] mx-auto px-4 h-full flex justify-between items-center">
 
           <Link to={'/'} className="transition ease-in-out hover:scale-105">
-            <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/logos/furniroLogoComplete.svg" alt="FurniroLogo" />
+            <img src="/assets/icons/furniroLogo.svg" alt="FurniroLogo" />
           </Link>
 
           <div className="hidden md:flex items-center">
@@ -67,11 +67,11 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
               </Link>
               :
               <Link to={'/profile'}>
-                <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/profile.svg" alt="UserProfileIcon" className="cursor-pointer w-7 hover:opacity-50" />
+                <img src="/assets/icons/userUnloggedIcon.svg" alt="UserProfileIcon" className="cursor-pointer w-7 hover:opacity-50" />
               </Link>
             }
             <div onClick={handleClickCart}>
-              <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/shoppingCart.svg" alt="ShoppingCartIcon" className="cursor-pointer hover:opacity-50" />
+              <img src="/assets/icons/cartIcon.svg" alt="ShoppingCartIcon" className="cursor-pointer hover:opacity-50" />
             </div>
             
             <div className="hidden md:flex" onClick={handleClickCart}>

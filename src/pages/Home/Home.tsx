@@ -7,7 +7,7 @@ const Home = () => {
     <>
       <section className="relative flex justify-center md:justify-end items-center py-40 px-10 md:px-20 2xl:px-80">
         <div className="absolute inset-0 w-full h-full">
-          <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/staticImages/homeBanner.png" alt="Furniro Home Banner" className='w-full h-full object-cover z-30' />
+          <img src="https://imgur.com/UZGl4QC.png" alt="Furniro Home Banner" className='w-full h-full object-cover z-30' />
         </div>
         
         <div className="flex flex-col z-40">
@@ -30,9 +30,9 @@ const Home = () => {
         </div>
         
         <div className="flex flex-row flex-wrap items-center justify-center mx-10 gap-10 mt-8">
-          <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/staticImages/dining.png" alt="Dining Room" className="cursor-pointer transition ease-in-out hover:scale-110" />
-          <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/staticImages/livingRoom.png" alt="Living Room" className="cursor-pointer transition ease-in-out hover:scale-110" />
-          <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/staticImages/bedroom.png" alt="Bedroom" className="cursor-pointer transition ease-in-out hover:scale-110" />
+          <img src="https://imgur.com/aCw3vdN.png" alt="Dining Room" className="cursor-pointer transition ease-in-out hover:scale-110" />
+          <img src="https://imgur.com/xEGXPuY.png" alt="Living Room" className="cursor-pointer transition ease-in-out hover:scale-110" />
+          <img src="https://imgur.com/JSPP49a.png" alt="Bedroom" className="cursor-pointer transition ease-in-out hover:scale-110" />
         </div>
       </section>
 
@@ -56,7 +56,7 @@ const Home = () => {
           <h3 className="font-medium text-subtitleGray text-center">Share your setup with</h3>
           <h1 className="font-bold text-3xl md:text-4xl text-titleGray text-center">#FurniroFurniture</h1>
         </div>
-        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/staticImages/shareImages.png" alt="Furniro Furniture" />
+        <img src="https://imgur.com/r00S5hn.png" alt="Furniro Furniture" />
       </section>
     </>
   )

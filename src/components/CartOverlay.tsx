@@ -23,7 +23,7 @@ const CartOverlay: React.FC = () => {
                 <div>
                     <div className="flex items-center justify-between border-b py-6">
                         <h3 className="hidden sm:flex font-semibold text-xl">Shopping Cart</h3>
-                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/cart-close.svg" alt="Close cart icon to close cart overlay" className='transition ease-in-out hover:scale-105 cursor-pointer'/>
+                        <img src="/assets/icons/closeCart.svg" alt="Close cart icon to close cart overlay" className='transition ease-in-out hover:scale-105 cursor-pointer'/>
                     </div>
 
                     <div className="flex flex-col gap-4">
@@ -55,7 +55,7 @@ const CartOverlay: React.FC = () => {
                                             onClick={() => handleRemoveFromCart(item.product.SKU)}
                                             className="p-0 m-0 flex items-center justify-end"
                                         >
-                                            <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/cart-item-remove.svg" alt="Close icon to remove cart item" className='transition ease-in-out hover:scale-105'/>
+                                            <img src="/assets/icons/close.svg" alt="Close icon to remove cart item" className='transition ease-in-out hover:scale-105'/>
                                         </button>
 
                                     </div>

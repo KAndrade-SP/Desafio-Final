@@ -37,25 +37,25 @@ const Footer = () => {
 
               <div className="flex items-center justify-center rounded-full bg-white w-7 h-7 shadow-md cursor-pointer hover:bg-carouselIndexGray">
                 <a href="https://www.facebook.com/" target="_blank">
-                  <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/facebook.svg" alt="Facebook Icon"/>
+                  <img src="/assets/icons/facebook 1.svg" alt="Facebook Icon"/>
                 </a>
               </div>
 
               <div className="flex items-center justify-center rounded-full bg-white w-7 h-7 shadow-md cursor-pointer hover:bg-carouselIndexGray">
                 <a href="https://www.instagram.com/" target="_blank">
-                  <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/instagram.svg" alt="Instagram Icon"/>
+                  <img src="/assets/icons/instagram 1.svg" alt="Instagram Icon"/>
                 </a>
               </div>
 
               <div className="flex items-center justify-center rounded-full bg-white w-7 h-7 shadow-md cursor-pointer hover:bg-carouselIndexGray">
                 <a href="https://x.com/" target="_blank">
-                  <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/twitter.svg" alt="Twitter Icon"/>
+                  <img src="/assets/icons/twitter 1.svg" alt="Twitter Icon"/>
                 </a>
               </div>
 
               <div className="flex items-center justify-center rounded-full bg-white w-7 h-7 shadow-md cursor-pointer hover:bg-carouselIndexGray">
                 <a href="https://www.linkedin.com/" target="_blank">
-                  <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/linkedin.svg" alt="LinkedIn Icon"/>
+                  <img src="/assets/icons/linkedin 1.svg" alt="LinkedIn Icon"/>
                 </a>
               </div>
 

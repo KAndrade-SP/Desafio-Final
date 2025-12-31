@@ -23,17 +23,17 @@ const Cart: React.FC = () => {
         <>
             <section className='relative h-[315px] flex justify-center items-center'>
                 <div className='absolute inset-0 w-full h-full'>
-                    <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/staticImages/ShopBanner.png" alt="Shop Banner" className='w-full h-full object-cover z-30' />
+                    <img src="https://imgur.com/YSc585L.png" alt="Shop Banner" className='w-full h-full object-cover z-30' />
                 </div>
 
                 <div className="flex flex-col gap-4 justify-center items-center z-40">
-                    <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/logos/Meubel-House_Logos-05.svg" alt="Furniro Compact Logo" className='w-[7.8rem]' />
+                    <img src="/assets/icons/Meubel House_Logos-05.svg" alt="Furniro Compact Logo" className='w-[7.8rem]' />
                     <h2 className='font-semibold text-5xl text-black text-center'>Cart</h2>
                     <div className='flex flex-row justify-center gap-3'>
                         <Link to="/">
                             <p className='font-semibold hover:text-subtitleGray'>Home</p>
                         </Link>
-                        <img src='https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/arrow.svg'></img>
+                        <img src='/assets/icons/arrow.svg'></img>
                         <p>Cart</p>
                     </div>
                 </div>
@@ -78,7 +78,7 @@ const Cart: React.FC = () => {
                                                 onClick={() => handleRemoveFromCart(item.product.SKU)}
                                                 className="p-0 m-0 transition ease-in-out hover:scale-105"
                                             >
-                                                <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/ant-design_delete-filled.svg" alt="Ant Icon to remove cart item" />
+                                                <img src="/assets/icons/ant.svg" alt="Ant Icon to remove cart item" />
                                             </button>
                                         </td>
                                     </tr>
@@ -120,7 +120,7 @@ const Cart: React.FC = () => {
                                         onClick={() => handleRemoveFromCart(item.product.SKU)}
                                         className="p-0 m-0 flex items-center justify-end transition ease-in-out hover:scale-105"
                                     >
-                                        <img src="https://final-challenge-compass.s3.us-east-2.amazonaws.com/icons/ant-design_delete-filled.svg" alt="Ant Icon to remove cart item" />
+                                        <img src="/assets/icons/ant.svg" alt="Ant Icon to remove cart item" />
                                     </button>
 
                                 </div>
